@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import Link from "next/link";
+import Script from "next/script";
+import "../../public/assets/vendor/bootstrap/css/bootstrap.min.css"
+import "../../public/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+// import "../../public/assets/vendor/aos/aos.css"
+import "../../public/assets/vendor/glightbox/css/glightbox.min.css"
+import "../../public/assets/vendor/swiper/swiper-bundle.min.css"
+import "../../public/assets/css/main.css"
+ 
 
-const inter = Inter({ subsets: ["latin"] });
+
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +25,33 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta charSet="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+        <meta content="" name="description" />
+        <meta content="" name="keywords" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com"  />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" 
+          rel="stylesheet" />
+        <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"></link>
+      </head>
+      <body >{children}</body>
+      {/* <div id="preloader"></div> */}
+      <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script>
+      <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="afterInteractive"></Script>
+      {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
+      <Script id="animate-on-scroll" strategy="lazyOnload">{`AOS.init()`}</Script>
+      <Script src="assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
+      <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script>
+      <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script>
+      <Script src="assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
+      <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script>
+      <Script src="assets/js/main.js" strategy="lazyOnload"></Script>
+      
     </html>
   );
 }

@@ -40,10 +40,11 @@ export default function RootLayout({
       </head>
       <body >{children}</body>
       {/* <div id="preloader"></div> */}
-      <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script>
-      <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="afterInteractive"></Script>
+      {/* <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script> */}
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
+      <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="beforeInteractive"></Script>
       {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
-      <Script id="animate-on-scroll" strategy="lazyOnload">{`AOS.init()`}</Script>
+      <Script id="animate-on-scroll" strategy="beforeInteractive">{`AOS.init()`}</Script>
       <Script src="assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
       <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script>
       <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script>

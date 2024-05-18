@@ -5,6 +5,7 @@ export const twtr = ""
 export const lkdn = ""
 export const ingr = ""
 export const ytbe = "/"
+export const location = "A108 ABC Street, Port Harcourt, PH 535022 Nigeria"
 
 export const tabs = [
     { text: "About LincGreen", href: "about" },
@@ -24,10 +25,10 @@ operations. `
 export const medium = ""
 export const iam = "LincGreen"
 export const objectives = [
-    { text: "Collaboration", icon: "bi bi-command" },
-    { text: "Research", icon: "bi bi-easel" },
-    { text: "Development", icon: "bi bi-gem" },
-    { text: "Platform", icon: "bi bi-geo-alt" }
+    { text: "Collaboration", icon: "bi bi-command", href: "" },
+    { text: "Research", icon: "bi bi-easel", href: "" },
+    { text: "Development", icon: "bi bi-gem", href: "" },
+    { text: "Platform", icon: "bi bi-geo-alt", href: "" }
 ]
 
 export const vizn = `A world where communities are resilient to climate change 
@@ -64,9 +65,39 @@ export const greens = [
 ]
 
 export const clientItems = [
-    {},
-    {},
-    {},
-    {},
-    {}
+    { src: "/assets/img/clients/client-1.png" },
+    { src: "/assets/img/clients/client-2.png" },
+    { src: "/assets/img/clients/client-3.png" },
+    { src: "/assets/img/clients/client-4.png" },
+    { src: "/assets/img/clients/client-5.png" },
+    { src: "/assets/img/clients/client-6.png" },
+    { src: "/assets/img/clients/client-7.png" },
+    { src: "/assets/img/clients/client-8.png" }
 ]
+
+export const textService = `Raising awareness about climate issues and advocating for 
+policy changes at local, national, and international levels.`
+
+export const portfolios = [
+    { iconClassName: "bi bi-activity", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" },
+    { iconClassName: "bi bi-broadcast", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" },
+    { iconClassName: "bi bi-easel", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" },
+    { iconClassName: "bi bi-bounding-box-circles", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" },
+    { iconClassName: "bi bi-calendar4-week", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" },
+    { iconClassName: "bi bi-chat-square-text", title: "In the journey...", text: `Encourage cooperation among technical professionals, communities, 
+    and young innovators to identify and understand specific climate crises 
+    faced by communities.`, href: "" }
+]
+
+export const contactText = `Collaborate with us to conduct research tracing the causes and effects of 
+climate crises and to recommend evidence-based solutions.`

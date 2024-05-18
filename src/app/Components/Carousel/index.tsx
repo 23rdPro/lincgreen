@@ -27,6 +27,7 @@ const Carousel = ({
       pagination={pagination}
       fadeEffect={fadeEffect}
       effect={effect}
+      loop
     >{props.children}</Swiper>
   )
 };

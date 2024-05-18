@@ -62,3 +62,11 @@ export const greens = [
     {text: `Increase awareness of climate issues and promote policy changes at local, national, and international levels.`},
     {text: `Enhance education and build capacity related to climate change and innovation.`}
 ]
+
+export const clientItems = [
+    {},
+    {},
+    {},
+    {},
+    {}
+]

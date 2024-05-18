@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { 
   aboutIntro,
   email, 
@@ -18,6 +21,7 @@ import {
   vizn,
   ytbe
 } from "./utils/consts";
+import ClientCarousel from "./Components/Carousel/clients";
 
 export default function Home() {
   return (
@@ -71,7 +75,7 @@ export default function Home() {
 
       <section id="hero" className="hero">
         <div className="container position-relative">
-          <div className="row gy-5" >  {/* data-aos="fade-in" */}
+          <div className="row gy-5" data-aos="fade-in">  
             <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
               <h2>Welcome to <span>{iam}</span></h2>
               <p>{vizn}</p>
@@ -92,7 +96,7 @@ export default function Home() {
                 src="/assets/img/hero-img.svg" 
                 className="img-fluid" 
                 alt="" 
-                // data-aos="zoom-out" 
+                data-aos="zoom-out" 
                 data-aos-delay="100" 
                 priority
               />
@@ -105,7 +109,7 @@ export default function Home() {
             <div className="row gy-4 mt-5">
 
             {objectives.map((objective, index) => (
-                <div key={index++} className="col-xl-3 col-md-6" data-aos-delay="100"> {/* data-aos="fade-up" */}
+                <div key={index++} className="col-xl-3 col-md-6" data-aos-delay="100" data-aos="fade-up"> {/*  */}
                 <div className="icon-box">
                   <div className="icon"><i className={objective.icon}></i></div>
                   <h4 className="title"><a href="" className="stretched-link">{objective.text}</a></h4>
@@ -155,10 +159,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <section id="clients" className="clients">
+        <section id="clients" className="clients">
           <div className="container" data-aos="zoom-out">
 
-            <div className="clients-slider swiper">
+            {/* <div className="clients-slider swiper">
               <div className="swiper-wrapper align-items-center">
                 <div className="swiper-slide"><Image width={100} height={100} src="/assets/img/clients/client-1.png" className="img-fluid" alt="" /></div>
                 <div className="swiper-slide"><Image width={100} height={100} src="/assets/img/clients/client-2.png" className="img-fluid" alt="" /></div>
@@ -169,10 +173,12 @@ export default function Home() {
                 <div className="swiper-slide"><Image width={100} height={100} src="/assets/img/clients/client-7.png" className="img-fluid" alt="" /></div>
                 <div className="swiper-slide"><Image width={100} height={100} src="/assets/img/clients/client-8.png" className="img-fluid" alt="" /></div>
               </div>
-            </div>
+            </div> */}
+            {/* <ClientCarousel /> */}
 
           </div>
-        </section> */}
+        </section>
+
       </main>
 
       <footer id="footer" className="footer">

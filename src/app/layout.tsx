@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import 'swiper/css';
 import Script from "next/script";
 import "../../public/assets/vendor/bootstrap/css/bootstrap.min.css"
 import "../../public/assets/vendor/bootstrap-icons/bootstrap-icons.css"
@@ -9,8 +10,6 @@ import "../../public/assets/vendor/glightbox/css/glightbox.min.css"
 import "../../public/assets/vendor/swiper/swiper-bundle.min.css"
 import "../../public/assets/css/main.css"
  
-
-
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

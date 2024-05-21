@@ -44,20 +44,21 @@ export default function RootLayout({
           rel="stylesheet" />
         <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"></link>
       </head>
-      <body >{children}</body>
-      {/* <div id="preloader"></div> */}
-      {/* <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script> */}
-      <Script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
-      <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="beforeInteractive"></Script>
-      {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
-      <Script id="animate-on-scroll" strategy="beforeInteractive">{`AOS.init()`}</Script>
-      <Script src="assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
-      <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script>
-      <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script>
-      <Script src="assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
-      <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script>
-      <Script src="assets/js/main.js" strategy="lazyOnload"></Script>
-      
+      <body>
+        {children}
+        {/* <div id="preloader"></div> */}
+        {/* <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script> */}
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
+        <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="beforeInteractive"></Script>
+        {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
+        <Script id="animate-on-scroll" strategy="beforeInteractive">{`AOS.init()`}</Script>
+        <Script src="assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
+        <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script>
+        <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script>
+        <Script src="assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
+        <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script>
+        <Script src="assets/js/main.js" strategy="lazyOnload"></Script>
+      </body>
     </html>
   );
 }

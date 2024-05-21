@@ -1,9 +1,7 @@
 import Image from "next/image";
 import { 
-  aboutArticle,
-  aboutIntro, contactText, email, fcbk, greens, iam, iconClasses, ingr, intro, lkdn, location, medium, mobile, 
-  objectives, portfolios, storyAbout, tabs, textService, topicAbout, twtr, 
-  vizn, ytbe
+  aboutIntro, contactText, email, greens, iam, iconClasses, 
+  intro, medium, mobile, objectives, tabs, textService, vizn,
 } from "./utils/consts";
 import ClientCarousel from "./Components/Carousel/clients";
 import { createClient } from "contentful";
@@ -318,7 +316,7 @@ export default async function Home() {
               <h4>Contact Us</h4>
               <p>
                 A108 ABC Street <br />
-                Port Harcourt, PH 535022
+                Port Harcourt, PH 535022<br />
                 Nigeria <br /><br />
                 <strong>Phone:</strong> {mobile}<br />
                 <strong>Email:</strong> {email}<br />

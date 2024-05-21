@@ -1,14 +1,30 @@
-"use client";
-
 import Image from "next/image";
 import { 
-  aboutIntro, contactText, email, fcbk, greens, iam, ingr, intro, lkdn, location, medium, mobile, 
+  aboutArticle,
+  aboutIntro, contactText, email, fcbk, greens, iam, iconClasses, ingr, intro, lkdn, location, medium, mobile, 
   objectives, portfolios, storyAbout, tabs, textService, topicAbout, twtr, 
   vizn, ytbe
 } from "./utils/consts";
 import ClientCarousel from "./Components/Carousel/clients";
+import { createClient } from "contentful";
+import Link from "next/link";
 
-export default function Home() {
+async function getData() {
+  const spaceId = process.env.SPACE_ID
+  const token = process.env.TOKEN
+  const client = createClient({ space: `${spaceId}`, accessToken: `${token}` })
+
+  try {
+    const entryId = process.env.ENTRY
+    const data = await client.getEntry(entryId!)
+    return data.fields;
+  } catch (error) {
+    console.error(error)
+  }
+};
+
+export default async function Home() {
+  const data = await getData()
   return (
     <>
       <header id="header" className="header d-flex align-items-center">
@@ -31,12 +47,12 @@ export default function Home() {
         <div className="container position-relative">
           <div className="row gy-5" data-aos="fade-in">  
             <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-              <h2>Welcome to <span>{iam}</span></h2>
+              <h2>Welcome to <span>{`${data!.iam}`}</span></h2>
               <p>{vizn}</p>
               <div className="d-flex justify-content-center justify-content-lg-start">
                 <a href="#footer" className="btn-get-started">Subscribe</a>
                 <a 
-                  href={ytbe} 
+                  href={`${data!.youtube || ""}`} 
                   className="glightbox btn-watch-video d-flex align-items-center">
                     <i className="bi bi-play-circle"></i><span>Our Projects</span>
                 </a>
@@ -63,14 +79,16 @@ export default function Home() {
           <div className="container position-relative">
             <div className="row gy-4 mt-5">
 
-            {objectives.map((objective, index) => (
-                <div key={index++} className="col-xl-3 col-md-6" data-aos-delay="100" data-aos="fade-up"> {/*  */}
-                <div className="icon-box">
-                  <div className="icon"><i className={objective.icon}></i></div>
-                  <h4 className="title"><a href="" className="stretched-link">{objective.text}</a></h4>
+            { // @ts-ignore
+              (data?.objectives).map((objective: any, index: any) => (
+                <div key={index++} className="col-xl-3 col-md-6" data-aos-delay="100" data-aos="fade-up">
+                  <div className="icon-box">
+                    <div className="icon"><i className={objective.icon}></i></div>
+                    <h4 className="title"><a href="" className="stretched-link">{objective.text}</a></h4>
+                  </div>
                 </div>
-              </div>
-              ))}
+              ))
+            }
               
             </div>
           </div>
@@ -85,17 +103,36 @@ export default function Home() {
             </div>
             <div className="row gy-4">
               <div className="col-lg-6">
-                <h3>{topicAbout}</h3>
+                <h3>
+                  { // @ts-ignore
+                    data?.aboutArticle!.topic
+                  }
+                </h3>
                 <Image 
                   width={650} 
                   height={650} 
-                  src="/assets/img/about.jpg" 
+                  // src="/assets/img/about.jpg" 
+                  src={
+                    // @ts-ignore
+                    `${process.env.ABOUT_IMG}`
+                  }
                   className="img-fluid rounded-4 mb-4" 
                   alt="" 
                   style={{ width: "auto", height: "auto" }}
                 />
-                <p>{storyAbout}</p>
-                <a href="" className="readmore stretched-link">Read more <i className="bi bi-arrow-right"></i></a>
+                <p>
+                  {
+                    // @ts-ignore
+                    data?.aboutArticle!.excerpt
+                  }
+                </p>
+                <a 
+                  href={ //@ts-ignore
+                    data?.aboutArticle!.href} 
+                  className="readmore stretched-link"
+                >Read more 
+                  <i className="bi bi-arrow-right"></i>
+                </a>
               </div>
               <div className="col-lg-6">
                 <div className="content ps-0 ps-lg-5">
@@ -116,7 +153,10 @@ export default function Home() {
                       alt="" 
                       style={{ width: "auto", height: "auto" }}
                     />
-                    <a href={ytbe} className="glightbox play-btn"></a>
+                    <Link
+                      href={`${data!.youtube}`} 
+                      className="glightbox play-btn">
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -130,10 +170,14 @@ export default function Home() {
         </section>
         <section id="call-to-action" className="call-to-action">
           <div className="container text-center" data-aos="zoom-out">
-            <a href={ytbe} className="glightbox play-btn"></a>
+            <Link
+              href={`${data!.youtube || ""}`} 
+              className="glightbox play-btn">
+            </Link>
             <h3>Call To Action</h3>
-            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a className="cta-btn" href="#">Call To Action</a>
+            <p> Join us in the LincGreen Initiative to combat climate crises in Nigeria through 
+              innovative collaboration!</p>
+            <a className="cta-btn" href={`${data!.youtube || ""}`} >Call To Action</a>
           </div>
         </section>
         <section id="portfolio" className="services sections-bg">
@@ -145,11 +189,13 @@ export default function Home() {
             </div>
 
             <div className="row gy-4" data-aos="fade-up" data-aos-delay="100">
-              {portfolios.map((portfolio, index) => (
+              { //@ts-ignore
+              data?.portfolios!.map((portfolio, index) => (
                 <div className="col-lg-4 col-md-6" key={index++}>
                   <div className="service-item  position-relative">
                     <div className="icon">
-                      <i className={portfolio.iconClassName}></i>
+                      <i className={ // @ts-ignore
+                        iconClasses[portfolio.category]}></i>
                     </div>
                     <h3>{portfolio.title}</h3>
                     <p>{portfolio.text}</p>
@@ -178,21 +224,24 @@ export default function Home() {
                     <i className="bi bi-geo-alt flex-shrink-0"></i>
                     <div>
                       <h4>Location:</h4>
-                      <p>{location}</p>
+                      <p>{`${data?.location}`}</p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
                     <i className="bi bi-envelope flex-shrink-0"></i>
                     <div>
                       <h4>Email:</h4>
-                      <p>{email}</p>
+                      <p>{`${data?.email}`}</p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
                     <i className="bi bi-phone flex-shrink-0"></i>
                     <div>
                       <h4>Call:</h4>
-                      <p>{mobile}</p>
+                      <p>
+                        { // @ts-ignore
+                        `${data?.phone!.join(' ')}`}
+                      </p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
@@ -244,10 +293,10 @@ export default function Home() {
               </a>
               <p>{intro}</p>
               <div className="social-links d-flex mt-4">
-                <a href={twtr} className="twitter"><i className="bi bi-twitter"></i></a>
-                <a href={fcbk} className="facebook"><i className="bi bi-facebook"></i></a>
-                <a href={ingr} className="instagram"><i className="bi bi-instagram"></i></a>
-                <a href={lkdn} className="linkedin"><i className="bi bi-linkedin"></i></a>
+                <a href={`${data?.twitter}`} className="twitter"><i className="bi bi-twitter"></i></a>
+                <a href={`${data?.facebook}`} className="facebook"><i className="bi bi-facebook"></i></a>
+                <a href={`${data?.instagram}`} className="instagram"><i className="bi bi-instagram"></i></a>
+                <a href={`${data?.linkedIn}`} className="linkedin"><i className="bi bi-linkedin"></i></a>
               </div>
             </div>
             <div className="col-lg-2 col-6 footer-links">

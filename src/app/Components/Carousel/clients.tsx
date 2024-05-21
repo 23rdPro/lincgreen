@@ -1,3 +1,5 @@
+"use client"
+
 import { clientItems, greens } from "@/app/utils/consts";
 import Carousel from ".";
 import { SwiperSlide } from "swiper/react";

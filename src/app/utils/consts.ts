@@ -6,6 +6,8 @@ export const lkdn = ""
 export const ingr = ""
 export const ytbe = "/"
 export const location = "A108 ABC Street, Port Harcourt, PH 535022 Nigeria"
+export const medium = ""
+export const iam = "LincGreen"
 
 export const tabs = [
     { text: "About LincGreen", href: "about" },
@@ -22,8 +24,6 @@ technical professionals and communities, hereby establish this
 constitution to guide our mission, vision, principles, and 
 operations. `
 
-export const medium = ""
-export const iam = "LincGreen"
 export const objectives = [
     { text: "Collaboration", icon: "bi bi-command", href: "" },
     { text: "Research", icon: "bi bi-easel", href: "" },
@@ -37,6 +37,12 @@ professionals and local communities.`
 
 export const aboutIntro = `Conducting research to trace the causes 
 and effects of climate crises and recommending evidence-based solutions.`
+
+export const aboutArticle = {
+    topic: "",
+    excerpt: "",
+    image: ""
+}
 
 export const topicAbout = `Climate Smart Agriculture: Supporting Smallholder Farmers 
 to Adapt to the Impact of Climate Change
@@ -98,6 +104,15 @@ export const portfolios = [
     and young innovators to identify and understand specific climate crises 
     faced by communities.`, href: "" }
 ]
+
+export const iconClasses = {
+    research: "bi bi-easel",
+    outreach: "bi bi-broadcast",
+    timeline: "bi bi-calendar4-week",
+    education: "bi bi-chat-square-text",
+    individual: "bi bi-bounding-box-circles",
+    development: "bi bi-activity"
+}
 
 export const contactText = `Collaborate with us to conduct research tracing the causes and effects of 
 climate crises and to recommend evidence-based solutions.`

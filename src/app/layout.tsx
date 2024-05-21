@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from "next/link";
 import 'swiper/css';
 import Script from "next/script";
 import "../../public/assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -10,8 +8,6 @@ import "../../public/assets/vendor/glightbox/css/glightbox.min.css"
 import "../../public/assets/vendor/swiper/swiper-bundle.min.css"
 import "../../public/assets/css/main.css"
  
-// const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "LincGreen Initiative",
   description: `
@@ -46,9 +42,10 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+          <a href="#" className="scroll-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
         {/* <div id="preloader"></div> */}
-        {/* <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script> */}
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
+        <Script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="lazyOnload"></Script>
+        {/* <Script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script> */}
         <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="beforeInteractive"></Script>
         {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
         <Script id="animate-on-scroll" strategy="beforeInteractive">{`AOS.init()`}</Script>

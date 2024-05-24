@@ -1,51 +1,101 @@
 import Image from "next/image";
 import { 
-  aboutIntro, contactText, email, greens, iam, iconClasses, 
-  intro, medium, mobile, objectives, tabs, textService, vizn,
+  aboutIntro, contactText, greens, iam, iconClasses, 
+  intro, objectives, tabs, textService, vizn,
 } from "./utils/consts";
 import ClientCarousel from "./Components/Carousel/clients";
 import { createClient } from "contentful";
 import Link from "next/link";
 
-async function getData() {
+type ContactFormType = {
+  name?: String,
+  email: String,
+  subject?: String,
+  message?: String
+};
+
+type FormType = {
+  data: ContactFormType,
+  contentType: Object
+}
+
+async function getClient() {
   const spaceId = process.env.SPACE_ID
   const token = process.env.TOKEN
   const client = createClient({ space: `${spaceId}`, accessToken: `${token}` })
+  return client
+};
 
+async function getData() {
+  const client = await getClient()
   try {
-    const entryId = process.env.ENTRY
-    const data = await client.getEntry(entryId!)
-    return data.fields;
+    const data = await client.getEntries({ content_type: "lincGreenProspects" })
+    return data.items[0].fields;
   } catch (error) {
     console.error(error)
+    return {};
   }
 };
 
+async function getEntry(id: string) {
+  const client = await getClient()
+  try {
+    const entry = await client.getEntry(id=id)
+    return entry.fields
+  } catch (error) {
+    console.error(error)
+    return {};
+  }
+};
+
+// async function postForm(form) {};
+
 export default async function Home() {
-  const data = await getData()
+  const fields: any = await getData()
+
+  console.log(fields, ">>>>>>>>>>>>><<<<<<<<<,")
+
+  const email = fields.email || "info@lincgreen.org"
+  const mobile = fields.mobile || "07039734721"
+  const socials = fields.socials || []
+  const about = fields.about?.fields || {}
+  const welcomeProject = fields.project || "https://google.com"
+  const stories = fields.stories || []
+  const video: any = await getEntry(about.video.sys.id)
+  const clients = fields.clients || []
+  const action = fields.action
+  console.log(action.fields.link)
+  
+
   return (
     <>
-      <section id="topbar" className="topbar d-flex align-items-center">
+      <section id="topbar" className="topbar d-flex align-items-center" >
         <div className="container d-flex justify-content-center justify-content-md-between">
           <div className="contact-info d-flex align-items-center">
-            <i className="bi bi-envelope d-flex align-items-center"><a href={`mailto:${data?.email}`}>{`${data?.email}`}</a></i>
+            <i className="bi bi-envelope d-flex align-items-center">
+              <a href={`mailto:${email}`}>{email}</a>
+            </i>
             <i className="bi bi-phone d-flex align-items-center ms-4">
-              <span>{ // @ts-ignore
-              `${data?.phone!.join(' ')}`}</span>
+              <span>{mobile}</span>
             </i>
           </div>
           <div className="social-links d-none d-md-flex align-items-center">
-            <a href={`${data?.twitter}`} className="twitter"><i className="bi bi-twitter"></i></a>
-            <a href={`${data?.facebook}`} className="facebook"><i className="bi bi-facebook"></i></a>
-            <a href={`${data?.instagram}`} className="instagram"><i className="bi bi-instagram"></i></a>
-            <a href={`${data?.linkedIn}`} className="linkedin"><i className="bi bi-linkedin"></i></a>
+            {socials.map((social: any, index: number) => (
+              <a 
+                key={index++} 
+                href={`${social.fields.link}`} 
+                className={`${social.fields.name?.toLowerCase()}`}>
+                  <i className={`bi bi-${social.fields.name?.toLowerCase()}`}></i>
+              </a>
+            ))}
+            
           </div>
         </div>
       </section>
-      <header id="header" className="header d-flex align-items-center">
+      <header id="header" className="header d-flex align-items-center" >
         <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
-            <h1>Lincgreen<span>.</span></h1>
+            <h1>LincGreen<span>.</span></h1>
           </a>
           <nav id="navbar" className="navbar">
             <ul>
@@ -62,12 +112,12 @@ export default async function Home() {
         <div className="container position-relative">
           <div className="row gy-5" data-aos="fade-in">  
             <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-              <h2>Welcome to <span>{`${data!.iam}`}</span></h2>
+              <h2>Welcome to <span>LincGreen</span></h2>
               <p>{vizn}</p>
               <div className="d-flex justify-content-center justify-content-lg-start">
-                <a href="#footer" className="btn-get-started">Subscribe</a>
+                <a href="#contact" className="btn-get-started">Get Started</a>
                 <a 
-                  href={`${data!.youtube || ""}`} 
+                  href={`${welcomeProject}`}
                   className="glightbox btn-watch-video d-flex align-items-center">
                     <i className="bi bi-play-circle"></i><span>Our Projects</span>
                 </a>
@@ -77,10 +127,9 @@ export default async function Home() {
               <Image 
                 width={550} 
                 height={550} 
-                // fill
                 src="/assets/img/hero-img.svg" 
                 className="img-fluid" 
-                alt="" 
+                alt={`${iam}`} 
                 data-aos="zoom-out" 
                 data-aos-delay="100" 
                 priority
@@ -94,16 +143,14 @@ export default async function Home() {
           <div className="container position-relative">
             <div className="row gy-4 mt-5">
 
-            { // @ts-ignore
-              (data?.objectives).map((objective: any, index: any) => (
-                <div key={index++} className="col-xl-3 col-md-6" data-aos-delay="100" data-aos="fade-up">
-                  <div className="icon-box">
-                    <div className="icon"><i className={objective.icon}></i></div>
-                    <h4 className="title"><a href="" className="stretched-link">{objective.text}</a></h4>
-                  </div>
+            {stories.map((story: any, index: number) => (
+              <div key={index++} className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div className="icon-box">
+                  <div className="icon"><i className={iconClasses[`${story.fields.name.toLowerCase()}`]}></i></div>
+                  <h4 className="title"><a href={`${story.fields.link}`} className="stretched-link">{`${story.fields.name.toUpperCase()}`}</a></h4>
                 </div>
-              ))
-            }
+              </div>
+            ))}
               
             </div>
           </div>
@@ -119,31 +166,21 @@ export default async function Home() {
             <div className="row gy-4">
               <div className="col-lg-6">
                 <h3>
-                  { // @ts-ignore
-                    data?.aboutArticle!.topic
-                  }
+                  {`${about.title}`}
                 </h3>
                 <Image 
                   width={650} 
                   height={650} 
-                  // src="/assets/img/about.jpg" 
-                  src={
-                    // @ts-ignore
-                    `${process.env.ABOUT_IMG}`
-                  }
+                  src={`https:${about.image.fields.file.url}`}
                   className="img-fluid rounded-4 mb-4" 
                   alt="" 
                   style={{ width: "auto", height: "auto" }}
                 />
                 <p>
-                  {
-                    // @ts-ignore
-                    data?.aboutArticle!.excerpt
-                  }
+                {`${about.description}`}
                 </p>
                 <a 
-                  href={ //@ts-ignore
-                    data?.aboutArticle!.href} 
+                  href={`${about.link}`}
                   className="readmore stretched-link"
                 >Read more 
                   <i className="bi bi-arrow-right"></i>
@@ -163,13 +200,13 @@ export default async function Home() {
                     <Image 
                       width={650}  
                       height={650} 
-                      src="/assets/img/about-2.jpg" 
+                      src={`https:${video.image?.fields.file.url}`} 
                       className="img-fluid rounded-4" 
-                      alt="" 
+                      alt={`${iam}`} 
                       style={{ width: "auto", height: "auto" }}
                     />
                     <Link
-                      href={`${data!.youtube}`} 
+                      href={`${video.link}`} 
                       className="glightbox play-btn">
                     </Link>
                   </div>
@@ -180,20 +217,19 @@ export default async function Home() {
         </section>
         <section id="clients" className="clients">
           <div className="container" data-aos="zoom-out">
-            <ClientCarousel />
+            <ClientCarousel clients={clients}/>
           </div>
         </section>
-        
         <section id="call-to-action" className="call-to-action">
           <div className="container text-center" data-aos="zoom-out">
             <Link
-              href={`${data!.youtube || ""}`} 
+              href={`${action.fields.link}`}
               className="glightbox play-btn">
             </Link>
             <h3>Call To Action</h3>
             <p> Join us in the LincGreen Initiative to combat climate crises in Nigeria through 
               innovative collaboration!</p>
-            <a className="cta-btn" href={`${data!.youtube || ""}`} >Call To Action</a>
+            <a className="cta-btn" href={`${action.fields.link}`}>Call To Action</a>
           </div>
         </section>
         <section id="portfolio" className="services sections-bg">
@@ -205,20 +241,7 @@ export default async function Home() {
             </div>
 
             <div className="row gy-4" data-aos="fade-up" data-aos-delay="100">
-              { //@ts-ignore
-              data?.portfolios!.map((portfolio, index) => (
-                <div className="col-lg-4 col-md-6" key={index++}>
-                  <div className="service-item  position-relative">
-                    <div className="icon">
-                      <i className={ // @ts-ignore
-                        iconClasses[portfolio.category]}></i>
-                    </div>
-                    <h3>{portfolio.title}</h3>
-                    <p>{portfolio.text}</p>
-                    <a href={portfolio.href} className="readmore stretched-link">Read more <i className="bi bi-arrow-right"></i></a>
-                  </div>
-                </div>
-              ))}
+              portfolio
             </div>
 
           </div>
@@ -240,14 +263,14 @@ export default async function Home() {
                     <i className="bi bi-geo-alt flex-shrink-0"></i>
                     <div>
                       <h4>Location:</h4>
-                      <p>{`${data?.location}`}</p>
+                      <p>location</p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
                     <i className="bi bi-envelope flex-shrink-0"></i>
                     <div>
                       <h4>Email:</h4>
-                      <p>{`${data?.email}`}</p>
+                      <p>email</p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
@@ -255,8 +278,7 @@ export default async function Home() {
                     <div>
                       <h4>Call:</h4>
                       <p>
-                        { // @ts-ignore
-                        `${data?.phone!.join(' ')}`}
+                        phone
                       </p>
                     </div>
                   </div>
@@ -300,25 +322,26 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <footer id="footer" className="footer">
+      <footer id="footer" className="footer position-absolute w-100">
         <div className="container">
           <div className="row gy-4">
             <div className="col-lg-5 col-md-12 footer-info">
-              <a href="index.html" className="logo d-flex align-items-center">
+              <a href="/" className="logo d-flex align-items-center">
                 <span>LincGreen</span>
               </a>
               <p>{intro}</p>
               <div className="social-links d-flex mt-4">
-                <a href={`${data?.twitter}`} className="twitter"><i className="bi bi-twitter"></i></a>
-                <a href={`${data?.facebook}`} className="facebook"><i className="bi bi-facebook"></i></a>
-                <a href={`${data?.instagram}`} className="instagram"><i className="bi bi-instagram"></i></a>
-                <a href={`${data?.linkedIn}`} className="linkedin"><i className="bi bi-linkedin"></i></a>
+                <a href="" className="twitter"><i className="bi bi-twitter"></i></a>
+                <a href="" className="facebook"><i className="bi bi-facebook"></i></a>
+                <a href="" className="instagram"><i className="bi bi-instagram"></i></a>
+                <a href="" className="linkedin"><i className="bi bi-linkedin"></i></a>
               </div>
             </div>
             <div className="col-lg-2 col-6 footer-links">
+              <h4>Useful Links</h4>
               <ul>
                 {tabs.map((tab, index) => (
-                  <li key={index++}><a href={`#${tab.href}`}>{tab.text}</a></li>
+                  <li key={index++}><Link href={`#${tab.href}`}>{tab.text}</Link></li>
                 ))}
               </ul>
             </div>
@@ -333,24 +356,24 @@ export default async function Home() {
             <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
               <h4>Contact Us</h4>
               <p>
-                A108 ABC Street <br />
-                Port Harcourt, PH 535022<br />
-                Nigeria <br /><br />
-                <strong>Phone:</strong> {mobile}<br />
-                <strong>Email:</strong> {email}<br />
+                
+                {/* <strong>Phone:</strong> {mobile}<br /> */}
+                {/* <strong>Email:</strong> {email}<br /> */}
               </p>
             </div>
           </div>
         </div>
         <div className="container mt-4">
           <div className="copyright">
-            &copy; Copyright <strong><span>Impact</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span></span></strong>. All Rights Reserved
           </div>
-          <div className="credits">
-            Designed by <a href={medium}>{iam}</a>
-          </div>
+          
         </div>
       </footer>
+      <Link href="#" className="scroll-top d-flex align-items-center justify-content-center active">
+        <i className="bi bi-arrow-up-short"></i>
+      </Link>
+      {/* {loading ? <div id="preloader"></div> : null} */}
     </>
   );
 }

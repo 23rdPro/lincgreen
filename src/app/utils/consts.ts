@@ -7,7 +7,7 @@ export const ingr = ""
 export const ytbe = "/"
 export const location = "A108 ABC Street, Port Harcourt, PH 535022 Nigeria"
 export const medium = ""
-export const iam = "LincGreen"
+export const iam = "LincGreenProspects"
 
 export const tabs = [
     { text: "About LincGreen", href: "about" },
@@ -105,7 +105,7 @@ export const portfolios = [
     faced by communities.`, href: "" }
 ]
 
-export const iconClasses = {
+export const iconClasses: any = {
     research: "bi bi-easel",
     outreach: "bi bi-broadcast",
     timeline: "bi bi-calendar4-week",
@@ -116,3 +116,4 @@ export const iconClasses = {
 
 export const contactText = `Collaborate with us to conduct research tracing the causes and effects of 
 climate crises and to recommend evidence-based solutions.`
+

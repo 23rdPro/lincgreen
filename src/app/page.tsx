@@ -53,6 +53,7 @@ async function getEntry(id: string) {
 export default async function Home() {
   const fields: any = await getData()
 
+  console.log(fields, ">>>>>>>>>>>>><<<<<<<<<,")
 
   const email = fields.email || "info@lincgreen.org"
   const mobile = fields.mobile || "07039734721"
@@ -63,6 +64,8 @@ export default async function Home() {
   const video: any = await getEntry(about.video.sys.id)
   const clients = fields.clients || []
   const action = fields.action
+  const portfolios = fields.portfolios || []
+  console.log(portfolios[0].fields)
   
 
   return (
@@ -232,16 +235,24 @@ export default async function Home() {
         </section>
         <section id="portfolio" className="services sections-bg">
           <div className="container" data-aos="fade-up">
-
             <div className="section-header">
               <h2>Our Services</h2>
               <p>{textService}</p>
             </div>
-
             <div className="row gy-4" data-aos="fade-up" data-aos-delay="100">
-              portfolio
+              {portfolios.map((portfolio: any, index: number) => (
+                <div key={index++} className="col-lg-4 col-md-6">
+                  <div className="service-item  position-relative">
+                    <div className="icon">
+                      <i className={iconClasses[`${portfolio.fields.icon}`]}></i>
+                    </div>
+                    <h3>{`${portfolio.fields.title}`}</h3>
+                    <p>{`${portfolio.fields.description}`.slice(0, 153)}...</p>
+                    <a href={`${portfolio.fields.link}`} className="readmore stretched-link">Read more <i className="bi bi-arrow-right"></i></a>
+                  </div>
+                </div>
+              ))}
             </div>
-
           </div>
         </section>
         <section id="contact" className="contact">
@@ -260,15 +271,24 @@ export default async function Home() {
                   <div className="info-item d-flex">
                     <i className="bi bi-geo-alt flex-shrink-0"></i>
                     <div>
-                      <h4>Location:</h4>
-                      <p>location</p>
+                      <h4>Socials:</h4>
+                      <p>
+                        {socials.map((social: any, index: number) => (
+                          <a 
+                            key={index++} 
+                            href={`${social.fields.link}`} 
+                            className={`${social.fields.name?.toLowerCase()}`}>
+                              <i className={`bi bi-${social.fields.name?.toLowerCase()}`}></i>
+                          </a>
+                        ))}
+                      </p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
                     <i className="bi bi-envelope flex-shrink-0"></i>
                     <div>
                       <h4>Email:</h4>
-                      <p>email</p>
+                      <p>{email}</p>
                     </div>
                   </div>
                   <div className="info-item d-flex">
@@ -276,7 +296,7 @@ export default async function Home() {
                     <div>
                       <h4>Call:</h4>
                       <p>
-                        phone
+                        {mobile}
                       </p>
                     </div>
                   </div>
@@ -329,10 +349,14 @@ export default async function Home() {
               </a>
               <p>{intro}</p>
               <div className="social-links d-flex mt-4">
-                <a href="" className="twitter"><i className="bi bi-twitter"></i></a>
-                <a href="" className="facebook"><i className="bi bi-facebook"></i></a>
-                <a href="" className="instagram"><i className="bi bi-instagram"></i></a>
-                <a href="" className="linkedin"><i className="bi bi-linkedin"></i></a>
+                {socials.map((social: any, index: number) => (
+                  <a 
+                    key={index++} 
+                    href={`${social.fields.link}`} 
+                    className={`${social.fields.name?.toLowerCase()}`}>
+                      <i className={`bi bi-${social.fields.name?.toLowerCase()}`}></i>
+                  </a>
+                ))}
               </div>
             </div>
             <div className="col-lg-2 col-6 footer-links">
@@ -355,8 +379,8 @@ export default async function Home() {
               <h4>Contact Us</h4>
               <p>
                 
-                {/* <strong>Phone:</strong> {mobile}<br /> */}
-                {/* <strong>Email:</strong> {email}<br /> */}
+                <strong>Phone:</strong> {mobile}<br />
+                <strong>Email:</strong> {email}<br />
               </p>
             </div>
           </div>

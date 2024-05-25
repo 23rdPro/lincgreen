@@ -13,7 +13,7 @@ export const tabs = [
     { text: "About LincGreen", href: "about" },
     { text: "Portfolio", href: "portfolio" },
     { text: "Catch up", href: "contact" },
-    { text: "Blog", href: "blog" }
+    // { text: "Blog", href: "blog" }
 ]
 
 export const intro = `We, the founding members of 

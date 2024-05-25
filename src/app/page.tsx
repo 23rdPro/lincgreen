@@ -53,7 +53,6 @@ async function getEntry(id: string) {
 export default async function Home() {
   const fields: any = await getData()
 
-  console.log(fields, ">>>>>>>>>>>>><<<<<<<<<,")
 
   const email = fields.email || "info@lincgreen.org"
   const mobile = fields.mobile || "07039734721"
@@ -64,7 +63,6 @@ export default async function Home() {
   const video: any = await getEntry(about.video.sys.id)
   const clients = fields.clients || []
   const action = fields.action
-  console.log(action.fields.link)
   
 
   return (

@@ -31,10 +31,6 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-        {/* <meta content="" name="description" />
-        <meta content="" name="keywords" /> */}
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link 
@@ -53,7 +49,7 @@ export default function RootLayout({
         {/* <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script> */}
         {/* <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script> */}
         <Script src="assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
-        <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script>
+        {/* <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script> */}
         <Script src="assets/js/main.js" strategy="lazyOnload"></Script>
       </body>
     </html>

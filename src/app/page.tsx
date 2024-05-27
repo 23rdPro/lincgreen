@@ -6,26 +6,21 @@ import {
 import ClientCarousel from "./Components/Carousel/clients";
 import { createClient } from "contentful";
 import Link from "next/link";
+import React from "react";
+import ContactForm from "./Components/Form/contactForm";
+import Form from "./Components/Form";
 
-type ContactFormType = {
-  name?: String,
-  email: String,
-  subject?: String,
-  message?: String
-};
-
-type FormType = {
-  data: ContactFormType,
-  contentType: Object
-}
-
-async function getClient() {
+function getEnv() {
   const spaceId = process.env.SPACE_ID
   const token = process.env.TOKEN
+  const cmaToken = process.env.CMATOKEN
+  return [spaceId, token, cmaToken]
+}; 
+const [spaceId, token, cmaToken] = getEnv()
+async function getClient() {
   const client = createClient({ space: `${spaceId}`, accessToken: `${token}` })
   return client
 };
-
 async function getData() {
   const client = await getClient()
   try {
@@ -36,7 +31,6 @@ async function getData() {
     return {};
   }
 };
-
 async function getEntry(id: string) {
   const client = await getClient()
   try {
@@ -47,14 +41,8 @@ async function getEntry(id: string) {
     return {};
   }
 };
-
-// async function postForm(form) {};
-
 export default async function Home() {
   const fields: any = await getData()
-
-  console.log(fields, ">>>>>>>>>>>>><<<<<<<<<,")
-
   const email = fields.email || "info@lincgreen.org"
   const mobile = fields.mobile || "07039734721"
   const socials = fields.socials || []
@@ -64,10 +52,7 @@ export default async function Home() {
   const video: any = await getEntry(about.video.sys.id)
   const clients = fields.clients || []
   const action = fields.action
-  const portfolios = fields.portfolios || []
-  console.log(portfolios[0].fields)
-  
-
+  const portfolios = fields.portfolios || []  
   return (
     <>
       <section id="topbar" className="topbar d-flex align-items-center" >
@@ -178,7 +163,7 @@ export default async function Home() {
                   style={{ width: "auto", height: "auto" }}
                 />
                 <p>
-                {`${about.description}`}
+                {`${about.description}`.slice(0, 1000)}
                 </p>
                 <a 
                   href={`${about.link}`}
@@ -262,9 +247,7 @@ export default async function Home() {
               <h2>Contact</h2>
               <p>{contactText}</p>
             </div>
-
             <div className="row gx-lg-0 gy-4">
-
               <div className="col-lg-4">
 
                 <div className="info-container d-flex flex-column align-items-center justify-content-center">
@@ -310,30 +293,10 @@ export default async function Home() {
                 </div>
 
               </div>
-
               <div className="col-lg-8">
-                <form action="forms/contact.php" method="post" role="form" className="php-email-form">
-                  <div className="row">
-                    <div className="col-md-6 form-group">
-                      <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
-                    </div>
-                    <div className="col-md-6 form-group mt-3 mt-md-0">
-                      <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
-                    </div>
-                  </div>
-                  <div className="form-group mt-3">
-                    <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
-                  </div>
-                  <div className="form-group mt-3">
-                    <textarea className="form-control" name="message" rows={7} placeholder="Message" required></textarea>
-                  </div>
-                  <div className="my-3">
-                    <div className="loading">Loading</div>
-                    <div className="error-message"></div>
-                    <div className="sent-message">Your message has been sent. Thank you!</div>
-                  </div>
-                  <div className="text-center"><button type="submit">Send Message</button></div>
-                </form>
+                <Form env={[spaceId, cmaToken]}>
+                  <ContactForm />
+                </Form>
               </div>
             </div>
 

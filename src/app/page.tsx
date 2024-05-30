@@ -137,11 +137,11 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section id="clients" className="clients">
+        {/* <section id="clients" className="clients">
           <div className="container" data-aos="zoom-out">
             <ClientCarousel clients={clients}/>
           </div>
-        </section>
+        </section> */}
         <section id="call-to-action" className="call-to-action">
           <div className="container text-center" data-aos="zoom-out">
             <Link

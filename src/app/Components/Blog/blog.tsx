@@ -15,7 +15,7 @@ const Blog = async () => {
                 <Image 
                   width={600}  
                   height={400} 
-                  src="/assets/img/blog/blog-1.jpg" 
+                  src="/assets/img/blog/blog-199.jpg" 
                   alt="" 
                   className="img-fluid" 
                 />

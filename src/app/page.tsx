@@ -1,47 +1,19 @@
 import Image from "next/image";
 import { 
-  aboutIntro, contactText, greens, iam, iconClasses, 
-  intro, objectives, tabs, textService, vizn,
+  aboutIntro, contactText, greens, iam, 
+  iconClasses, textService, vizn,
 } from "./utils/consts";
 import ClientCarousel from "./Components/Carousel/clients";
-import { createClient } from "contentful";
 import Link from "next/link";
 import React from "react";
 import ContactForm from "./Components/Form/contactForm";
 import Form from "./Components/Form";
-
-function getEnv() {
-  const spaceId = process.env.SPACE_ID
-  const token = process.env.TOKEN
-  const cmaToken = process.env.CMATOKEN
-  return [spaceId, token, cmaToken]
-}; 
-const [spaceId, token, cmaToken] = getEnv()
-async function getClient() {
-  const client = createClient({ space: `${spaceId}`, accessToken: `${token}` })
-  return client
-};
-async function getData() {
-  const client = await getClient()
-  try {
-    const data = await client.getEntries({ content_type: "lincGreenProspects" })
-    return data.items[0].fields;
-  } catch (error) {
-    console.error(error)
-    return {};
-  }
-};
-async function getEntry(id: string) {
-  const client = await getClient()
-  try {
-    const entry = await client.getEntry(id=id)
-    return entry.fields
-  } catch (error) {
-    console.error(error)
-    return {};
-  }
-};
+import Footer from "./Components/Footer";
+import TopBar from "./Components/TopBar";
+import Header from "./Components/Header";
+import { cmaToken, getData, getEntry, spaceId } from "./utils/libs/contentful";
 export default async function Home() {
+
   const fields: any = await getData()
   const email = fields.email || "info@lincgreen.org"
   const mobile = fields.mobile || "07039734721"
@@ -52,48 +24,12 @@ export default async function Home() {
   const video: any = await getEntry(about.video.sys.id)
   const clients = fields.clients || []
   const action = fields.action
-  const portfolios = fields.portfolios || []  
+  const portfolios = fields.portfolios || [] 
+  
   return (
     <>
-      <section id="topbar" className="topbar d-flex align-items-center" >
-        <div className="container d-flex justify-content-center justify-content-md-between">
-          <div className="contact-info d-flex align-items-center">
-            <i className="bi bi-envelope d-flex align-items-center">
-              <a href={`mailto:${email}`}>{email}</a>
-            </i>
-            <i className="bi bi-phone d-flex align-items-center ms-4">
-              <span>{mobile}</span>
-            </i>
-          </div>
-          <div className="social-links d-none d-md-flex align-items-center">
-            {socials.map((social: any, index: number) => (
-              <a 
-                key={index++} 
-                href={`${social.fields.link}`} 
-                className={`${social.fields.name?.toLowerCase()}`}>
-                  <i className={`bi bi-${social.fields.name?.toLowerCase()}`}></i>
-              </a>
-            ))}
-            
-          </div>
-        </div>
-      </section>
-      <header id="header" className="header d-flex align-items-center" >
-        <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-          <a href="/" className="logo d-flex align-items-center">
-            <h1>LincGreen<span>.</span></h1>
-          </a>
-          <nav id="navbar" className="navbar">
-            <ul>
-              {tabs.map((tab, index: number) => (
-                <li key={index++}><a href={`#${tab.href}`}>{tab.text}</a></li>
-              ))}
-            </ul>
-          </nav>
-          <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-          <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        </div>
-      </header>
+      <TopBar socials={socials} email={email} />
+      <Header />
       <section id="hero" className="hero">
         <div className="container position-relative">
           <div className="row gy-5" data-aos="fade-in">  
@@ -303,58 +239,7 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <footer id="footer" className="footer position-absolute w-100">
-        <div className="container">
-          <div className="row gy-4">
-            <div className="col-lg-5 col-md-12 footer-info">
-              <a href="/" className="logo d-flex align-items-center">
-                <span>LincGreen</span>
-              </a>
-              <p>{intro}</p>
-              <div className="social-links d-flex mt-4">
-                {socials.map((social: any, index: number) => (
-                  <a 
-                    key={index++} 
-                    href={`${social.fields.link}`} 
-                    className={`${social.fields.name?.toLowerCase()}`}>
-                      <i className={`bi bi-${social.fields.name?.toLowerCase()}`}></i>
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div className="col-lg-2 col-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                {tabs.map((tab, index) => (
-                  <li key={index++}><Link href={`#${tab.href}`}>{tab.text}</Link></li>
-                ))}
-              </ul>
-            </div>
-            <div className="col-lg-2 col-6 footer-links">
-              <h4>Our Story</h4>
-              <ul>
-                {objectives.map((objective, index) => (
-                  <li key={index++}><a href={objective.href}>{objective.text}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-              <h4>Contact Us</h4>
-              <p>
-                
-                <strong>Phone:</strong> {mobile}<br />
-                <strong>Email:</strong> {email}<br />
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="container mt-4">
-          <div className="copyright">
-            &copy; Copyright <strong><span></span></strong>. All Rights Reserved
-          </div>
-          
-        </div>
-      </footer>
+      <Footer socials={socials} />
       <Link href="#" className="scroll-top d-flex align-items-center justify-content-center active">
         <i className="bi bi-arrow-up-short"></i>
       </Link>

@@ -8,7 +8,9 @@ import "../../public/assets/vendor/aos/aos.css"
 import "../../public/assets/vendor/glightbox/css/glightbox.min.css"
 import "../../public/assets/vendor/swiper/swiper-bundle.min.css"
 import "../../public/assets/css/main.css"
-import "../app/css/footer.css" 
+import "../app/css/footer.css"
+
+ 
 export const metadata: Metadata = {
   title: "LincGreen Initiative",
   description: `
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
   between technical professionals and local communities..
   `,
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,12 +46,12 @@ export default function RootLayout({
         <Script src="https://unpkg.com/aos@next/dist/aos.js" strategy="afterInteractive"></Script>
         {/* <Script src="assets/vendor/aos/aos.js" strategy="lazyOnload"></Script> */}
         <Script id="animate-on-scroll" strategy="lazyOnload">{`AOS.init()`}</Script>
-        <Script src="assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
+        <Script src="public/assets/vendor/glightbox/js/glightbox.min.js" strategy="lazyOnload"></Script>
         {/* <Script src="assets/vendor/purecounter/purecounter_vanilla.js" strategy="lazyOnload"></Script> */}
         {/* <Script src="assets/vendor/swiper/swiper-bundle.min.js" strategy="lazyOnload"></Script> */}
-        <Script src="assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
+        <Script src="public/assets/vendor/isotope-layout/isotope.pkgd.min.js" strategy="lazyOnload"></Script>
         {/* <Script src="assets/vendor/php-email-form/validate.js" strategy="lazyOnload"></Script> */}
-        <Script src="assets/js/main.js" strategy="lazyOnload"></Script>
+        <Script src="public/assets/js/main.js" strategy="lazyOnload"></Script>
       </body>
     </html>
   );

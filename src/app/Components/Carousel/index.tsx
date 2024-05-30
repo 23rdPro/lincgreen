@@ -1,6 +1,5 @@
 import React from 'react';
 import { Swiper } from "swiper/react";
-
 const Carousel = ({
   className, 
   slidesPerView,
@@ -31,5 +30,4 @@ const Carousel = ({
     >{props.children}</Swiper>
   )
 };
-
 export default Carousel;

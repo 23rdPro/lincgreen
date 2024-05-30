@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import { createClient as voidClient } from 'contentful-management';
-
 type EntryType = {
   name?: String,
   email?: String,
@@ -9,7 +8,7 @@ type EntryType = {
   message?: String
 };
 const Form = ({ children, env }: { children: React.ReactNode, env: any}) => {
-  const [spaceId, token] = env
+  const [spaceId, cmaToken] = env
   const [entryData, setEntryData] = React.useState<EntryType>({});
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [isPublished, setIsPublished] = React.useState(false); 
@@ -24,7 +23,7 @@ const Form = ({ children, env }: { children: React.ReactNode, env: any}) => {
   async function postEntry(e: React.FormEvent, data: EntryType) {
     e.preventDefault()
     setIsSubmitting(true);
-    const client = voidClient({accessToken: token})
+    const client = voidClient({accessToken: cmaToken})
     try {
       const space = await client.getSpace(spaceId)
       const environment = await space.getEnvironment('master')
@@ -60,11 +59,14 @@ const Form = ({ children, env }: { children: React.ReactNode, env: any}) => {
       <div className="my-3">
         {isSubmitting && <div className="loading">Loading...</div>}
         {!isSubmitting && errorMessage && <div className="error-message">{errorMessage}</div>}
-        {!isSubmitting && isPublished && <div className="sent-message">Your message has been sent. Thank you!</div>}
+        {!isSubmitting && isPublished && 
+          <div className="sent-message">Your message has been sent. Thank you!</div>
+        }
       </div>
-      <div className="text-center"><button type="submit" disabled={isPublished}>Send Message</button></div>
+      <div className="text-center">
+        <button type="submit" disabled={isPublished}>Send Message</button>
+      </div>
     </form>
   )
 };
-
 export default Form;

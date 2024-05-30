@@ -1,11 +1,9 @@
-"use client"
-
-import { clientItems, greens } from "@/app/utils/consts";
+"use client";
+import { clientItems } from "@/app/utils/consts";
 import Carousel from ".";
 import { SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import Image from "next/image";
-
 const clients = (Component: typeof Carousel) => {
   const WithComponent = ({ clients }: any) => {
     return (
@@ -56,9 +54,5 @@ const clients = (Component: typeof Carousel) => {
   }
   return WithComponent
 };
-
 const ClientCarousel = clients(Carousel)
-
 export default ClientCarousel;
-
-

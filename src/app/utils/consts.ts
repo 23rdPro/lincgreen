@@ -10,10 +10,10 @@ export const medium = ""
 export const iam = "LincGreenProspects"
 
 export const tabs = [
-    { text: "About LincGreen", href: "about" },
-    { text: "Portfolio", href: "portfolio" },
-    { text: "Catch up", href: "contact" },
-    // { text: "Blog", href: "blog" }
+    { text: "About LincGreen", href: "/#about" },
+    { text: "Portfolio", href: "/#portfolio" },
+    { text: "Catch up", href: "/#contact" },
+    { text: "Blog", href: "/pages/blog" }
 ]
 
 export const intro = `We, the founding members of 
@@ -117,3 +117,12 @@ export const iconClasses: any = {
 export const contactText = `Collaborate with us to conduct research tracing the causes and effects of 
 climate crises and to recommend evidence-based solutions.`
 
+export const makeTime = ({ timestamp }: { timestamp: string }) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    };
+    const date = new Date(timestamp)
+    return date.toLocaleString('en-US', options)
+};

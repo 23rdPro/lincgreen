@@ -1,8 +1,5 @@
 "use client";
-
 import React from 'react';
-
-
 const ContactForm = ({ entryData, onFieldChange }: any) => {
   const entry = {}
   return ( 
@@ -52,11 +49,8 @@ const ContactForm = ({ entryData, onFieldChange }: any) => {
           rows={7} 
           placeholder="Message" 
           required></textarea>
-      </div>
-      
-      
+      </div>      
     </>
   )
 };
-
 export default ContactForm;

@@ -29,7 +29,7 @@ export default async function Post({
                 <article className="blog-details">
                   <div className="post-img">
                     <Image 
-                      priority
+                      unoptimized
                       width={900} 
                       height={700} 
                       src={`https://${post.coverImage.fields.file.url}`}
@@ -75,7 +75,7 @@ export default async function Post({
                       {posts?.map(( pozt: any, index: number) => (
                         <div key={index++} className="post-item mt-3">
                           <Image 
-                            priority
+                            unoptimized
                             src={`https://${pozt.fields.coverImage.fields.file.url}`} 
                             alt="" 
                             width={80}

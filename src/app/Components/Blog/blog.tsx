@@ -15,7 +15,7 @@ const Blog = async () => {
                 <Image 
                   width={600}  
                   height={400} 
-                  src="/assets/img/blog/blog-199.jpg" 
+                  src={`https://${blog.fields.coverImage.fields.file.url}`}
                   alt="" 
                   className="img-fluid" 
                 />
@@ -29,7 +29,7 @@ const Blog = async () => {
                 <Image 
                   width={50} 
                   height={50} 
-                  src="/assets/img/blog/blog-author.jpg" 
+                  src={`https://${blog.fields.author.fields.image.fields.file.url}`}
                   alt="" 
                   className="img-fluid post-author-img flex-shrink-0" 
                 />
@@ -54,13 +54,13 @@ const Blog = async () => {
           </div>
           ))}
         </div>
-        <div className="blog-pagination">
+        {/* <div className="blog-pagination">
           <ul className="justify-content-center">
             <li><a href="#">1</a></li>
             <li className="active"><a href="#">2</a></li>
             <li><a href="#">3</a></li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </section>
   );

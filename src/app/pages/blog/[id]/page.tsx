@@ -31,7 +31,7 @@ export default async function Post({
                     <Image 
                       width={900} 
                       height={700} 
-                      src="/assets/img/blog/blog-1.jpg" 
+                      src={`https://${post.coverImage.fields.file.url}`}
                       alt="" 
                       className="img-fluid" 
                     />

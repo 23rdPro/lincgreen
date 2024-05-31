@@ -18,7 +18,7 @@ const options = {
       try {
         const { file, title } = node.data.target.fields;
         const fileURL = `https://${file.url}`
-        return <Image src={fileURL} alt={title} width={790} height={500} />
+        return <Image unoptimized src={fileURL} alt={title} width={790} height={500} />
       } catch(error) {
         console.error(error, node)
         return null

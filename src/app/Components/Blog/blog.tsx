@@ -13,7 +13,7 @@ const Blog = async () => {
             <article>
               <div className="post-img">
                 <Image 
-                  unoptimized
+                  priority
                   width={600}  
                   height={400} 
                   src={`https://${blog.fields.coverImage.fields.file.url}`}

@@ -28,7 +28,7 @@ const Blog = async () => {
               </h2>
               <div className="d-flex align-items-center">
                 <Image 
-                  unoptimized
+                  priority
                   width={50} 
                   height={50} 
                   src={`https://${blog.fields.author.fields.image.fields.file.url}`}

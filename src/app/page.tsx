@@ -91,6 +91,7 @@ export default async function Home() {
                   {`${about.title}`}
                 </h3>
                 <Image 
+                  priority
                   width={650} 
                   height={650} 
                   src={`https:${about.image.fields.file.url}`}
@@ -120,6 +121,7 @@ export default async function Home() {
                   </ul>
                   <div className="position-relative mt-4">
                     <Image 
+                      priority
                       width={650}  
                       height={650} 
                       src={`https:${video.image?.fields.file.url}`} 

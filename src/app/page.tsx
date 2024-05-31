@@ -3,7 +3,6 @@ import {
   aboutIntro, contactText, greens, iam, 
   iconClasses, textService, vizn,
 } from "./utils/consts";
-import ClientCarousel from "./Components/Carousel/clients";
 import Link from "next/link";
 import React from "react";
 import ContactForm from "./Components/Form/contactForm";
@@ -13,7 +12,6 @@ import TopBar from "./Components/TopBar";
 import Header from "./Components/Header";
 import { cmaToken, getData, getEntry, spaceId } from "./utils/libs/contentful";
 export default async function Home() {
-
   const fields: any = await getData()
   const email = fields.email || "info@lincgreen.org"
   const mobile = fields.mobile || "07039734721"
@@ -22,10 +20,8 @@ export default async function Home() {
   const welcomeProject = fields.project || "https://google.com"
   const stories = fields.stories || []
   const video: any = await getEntry(about.video.sys.id)
-  const clients = fields.clients || []
   const action = fields.action
   const portfolios = fields.portfolios || [] 
-  
   return (
     <>
       <TopBar socials={socials} email={email} />
@@ -60,11 +56,9 @@ export default async function Home() {
             </div>
           </div>
         </div>
-
         <div className="icon-boxes position-relative">
           <div className="container position-relative">
             <div className="row gy-4 mt-5">
-
             {stories.map((story: any, index: number) => (
               <div key={index++} className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div className="icon-box">
@@ -73,7 +67,6 @@ export default async function Home() {
                 </div>
               </div>
             ))}
-              
             </div>
           </div>
         </div>
@@ -245,7 +238,6 @@ export default async function Home() {
       <Link href="#" className="scroll-top d-flex align-items-center justify-content-center active">
         <i className="bi bi-arrow-up-short"></i>
       </Link>
-      {/* {loading ? <div id="preloader"></div> : null} */}
     </>
   );
 }

@@ -111,7 +111,9 @@ export const iconClasses: any = {
     timeline: "bi bi-calendar4-week",
     education: "bi bi-chat-square-text",
     individual: "bi bi-bounding-box-circles",
-    development: "bi bi-activity"
+    development: "bi bi-activity",
+    collaboration: "bi bi-chat-square-text",
+    platform: "bi bi-bounding-box-circles"
 }
 
 export const contactText = `Collaborate with us to conduct research tracing the causes and effects of 

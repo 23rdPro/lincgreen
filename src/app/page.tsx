@@ -63,7 +63,7 @@ export default async function Home() {
               <div key={index++} className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div className="icon-box">
                   <div className="icon"><i className={iconClasses[`${story.fields.name.toLowerCase()}`]}></i></div>
-                  <h4 className="title"><a href={`${story.fields.link}`} className="stretched-link">{`${story.fields.name.toUpperCase()}`}</a></h4>
+                  <h4 className="title"><a href={`${story.fields.link || ""}`} className="stretched-link">{`${story.fields.name.toUpperCase()}`}</a></h4>
                 </div>
               </div>
             ))}
@@ -163,7 +163,7 @@ export default async function Home() {
                       <i className={iconClasses[`${portfolio.fields.icon}`]}></i>
                     </div>
                     <h3>{`${portfolio.fields.title}`}</h3>
-                    <p>{`${portfolio.fields.description}`.slice(0, 153)}...</p>
+                    <p>{`${portfolio.fields.description}`.slice(0, 1000)}</p>
                     <a href={`${portfolio.fields.link}`} className="readmore stretched-link">Read more <i className="bi bi-arrow-right"></i></a>
                   </div>
                 </div>

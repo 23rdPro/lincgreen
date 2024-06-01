@@ -1,6 +1,5 @@
 import React from "react";
-import Blogs from "@/app/Components/Blog";
 const Blog = async () => { 
-    return <Blogs /> 
+    return <></>
 };
 export default Blog;

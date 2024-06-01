@@ -85,8 +85,8 @@ export default async function Home() {
                 </h3>
                 <Image 
                   unoptimized
-                  width={650} 
-                  height={650} 
+                  width={350} 
+                  height={350} 
                   src={`https:${about.image.fields.file.url}`}
                   className="img-fluid rounded-4 mb-4" 
                   alt="" 

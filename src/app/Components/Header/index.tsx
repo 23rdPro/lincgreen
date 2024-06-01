@@ -14,8 +14,8 @@ const Header = () => {
             ))}
           </ul>
         </nav>
-        <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        {/* <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i> */}
       </div>
     </header>
   )

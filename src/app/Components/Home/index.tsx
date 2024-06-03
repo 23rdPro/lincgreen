@@ -116,7 +116,7 @@ const Home = ({
                       <i className={iconClasses[`${portfolio.fields.icon}`]}></i>
                     </div>
                     <h3>{`${portfolio.fields.title}`}</h3>
-                    <p>{`${portfolio.fields.description}`.slice(0, 1000)}</p>
+                    <p>{`${portfolio.fields.description}`.slice(0, 500)}  . . .</p>
                     <a href={`${portfolio.fields.link}`} className="readmore stretched-link">Read more <i className="bi bi-arrow-right"></i></a>
                   </div>
                 </div>

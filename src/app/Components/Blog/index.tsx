@@ -1,39 +1,30 @@
+"use client";
 import React from "react";
-import TopBar from "@/app/Components/TopBar";
-import { getData } from "@/app/utils/libs/contentful";
-import Footer from "../Footer";
-import { tabs } from "@/app/utils/consts";
-import Blog from "./blog";
 import Breadcrumb from "../Breadcrumb";
-const Blogs = async () => {
-  const fields: any = await getData()
-  const socials = fields.socials || []
-  const email = fields.email || "info@lincgreen.org"
-  return (
-    <>
-      <TopBar socials={socials} email={email} />
-      <header id="header" className="header d-flex align-items-center">
-        <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-          <a href="index.html" className="logo d-flex align-items-center">
-            <h1>LincGreen<span>.</span></h1>
-          </a>
-          <nav id="navbar" className="navbar">
-            <ul>
-              {tabs.map((tab, index: number) => (
-                <li key={index++}><a href={`${tab.href}`}>{tab.text}</a></li>
-              ))}
+import PropType from "prop-types";
+import { usePathname } from "next/navigation";
+import BlogList from "../BlogList";
+const Blogs = ({ blogs }: any) => {
+  const path = usePathname();
+  return path === "/pages/blog" ? (
+    <main id="main">
+      <Breadcrumb />
+      <section id="blog" className="blog">
+        <div className="container" data-aos="fade-up">
+          <BlogList blogs={blogs}/>
+          {/* <div className="blog-pagination">
+            <ul className="justify-content-center">
+              <li><a href="#">1</a></li>
+              <li className="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
             </ul>
-          </nav>
-          <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-          <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+          </div> */}
         </div>
-      </header>
-      <main id="main">
-        <Breadcrumb />
-        <Blog />
-      </main>
-      <Footer socials={socials} />
-    </>
-  );
+      </section>
+    </main>
+  ) : <></>
+};
+Blogs.propTypes = {
+  blogs: PropType.any.isRequired,
 };
 export default Blogs; 

@@ -4,7 +4,7 @@ import Carousel from ".";
 import { SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Image from "next/image";
-const clients = (Component: typeof Carousel) => {
+const clientsComponent = (Component: typeof Carousel) => {
   const WithComponent = ({ clients }: any) => {
     return (
       <Component 
@@ -18,20 +18,6 @@ const clients = (Component: typeof Carousel) => {
         speed={4000}
       >
         <div className="wiper-wrapper align-items-center">
-          {clientItems.map((item, index) => (
-            <SwiperSlide key={index++} className="swiper-slide">
-              <div className="swiper-slide">
-                <Image 
-                  width={100} 
-                  height={100} 
-                  src={item.src} 
-                  className="img-fluid" 
-                  alt="" 
-                  style={{ width: "auto", height: "auto" }}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
           {clients.map((client: any) => (
             client.fields.logo.map((img: any, index:number) => (
               <SwiperSlide key={index++} className="swiper-slide">
@@ -54,5 +40,5 @@ const clients = (Component: typeof Carousel) => {
   }
   return WithComponent
 };
-const ClientCarousel = clients(Carousel)
+const ClientCarousel = clientsComponent(Carousel)
 export default ClientCarousel;

@@ -13,7 +13,7 @@ const options = {
     [BLOCKS.HEADING_4]: (node: any, children: any) => <h4>{children}</h4>,
     [BLOCKS.HEADING_5]: (node: any, children: any) => <h4>{children}</h4>,
     [BLOCKS.HEADING_6]: (node: any, children: any) => <h4>{children}</h4>,
-    [BLOCKS.QUOTE]: (node: any, children: any) => <blockquote><p>{children}</p></blockquote>,
+    [BLOCKS.QUOTE]: (node: any, children: any) => <blockquote>{children}</blockquote>,
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       try {
         const { file, title } = node.data.target.fields;
